@@ -6,7 +6,10 @@ const Home = () => {
     <>
       <h1>{title}</h1>
       <div>
-        <Link to={`/card/`}>新規登録</Link>
+        <Link to={`/create`}>新規登録</Link>
+      </div>
+      <div>
+        <Link to={`/card`}>カード一覧</Link>
       </div>
     </>
   );
