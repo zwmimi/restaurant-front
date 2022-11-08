@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Restaurant } from "../../../types/restaurant";
 
 export const Form = () => {
-  const [formItem, setFormItem] = useState<Restaurant>({
+  const initialFormItem = {
     name: "",
     url: "",
     description: "",
-  });
+  };
+  const [formItem, setFormItem] = useState<Restaurant>(initialFormItem);
   const setNewFormItem = (key: keyof Restaurant, val: string) => {
     const newFormItem = () => {
       switch (key) {
@@ -23,7 +23,7 @@ export const Form = () => {
     };
     setFormItem(newFormItem);
   };
-
+  const clearFormItem = () => setFormItem(initialFormItem);
   return (
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
@@ -35,6 +35,7 @@ export const Form = () => {
             type="text"
             name="name"
             id="name"
+            value={formItem.name}
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none"
             onChange={(e) => setNewFormItem("name", e.target.value)}
           />
@@ -47,6 +48,7 @@ export const Form = () => {
             type="text"
             name="url"
             id="url"
+            value={formItem.url}
             placeholder="https://tabelog.com/"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none"
             onChange={(e) => setNewFormItem("url", e.target.value)}
@@ -60,20 +62,22 @@ export const Form = () => {
             type="text"
             name="description"
             id="description"
+            value={formItem.description}
             placeholder="店の雰囲気など"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none"
             onChange={(e) => setNewFormItem("description", e.target.value)}
           />
         </div>
         <div>
-          <button className="bg-yellow-400 py-2 px-4 mr-4 font-semibold text-white outline-none rounded">
+          <button className="bg-lime-400 py-2 px-4 mr-4 font-semibold text-white outline-none rounded">
             登録
           </button>
-          <Link to={`/`}>
-            <button className="bg-transparent text-yellow-400 py-2 px-4 font-semibold border border-yellow-400 rounded">
-              キャンセル
-            </button>
-          </Link>
+          <button
+            onClick={() => clearFormItem()}
+            className="bg-transparent text-lime-400 py-2 px-4 font-semibold border border-lime-400 rounded"
+          >
+            クリア
+          </button>
         </div>
       </div>
     </div>
