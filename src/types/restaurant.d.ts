@@ -3,3 +3,5 @@ export type Restaurant = {
   url: string;
   description: string;
 };
+
+export type ResponseRestaurant = Restaurant & { id: string };

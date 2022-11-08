@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { User } from "../../types/user";
+import { ResponseRestaurant } from "../../types/restaurant";
 import { ToTopButton } from "../atoms/button/ToTopButton";
 import { Table } from "../atoms/table/Table";
 
 const Restaurant = () => {
-  const [state, setState] = useState<User[]>([]);
+  const [restaurants, setRestaurants] = useState<ResponseRestaurant[]>([]);
+
   useEffect(() => {
     const fetchUserList = async () => {
-      const result = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-      ).then((res) => {
-        return res.json();
-      });
-      setState(result);
+      const results = await fetch("http://localhost:3000/restaurants").then(
+        (res) => {
+          return res.json();
+        }
+      );
+      setRestaurants(results);
     };
     fetchUserList();
   }, []);
@@ -22,7 +23,7 @@ const Restaurant = () => {
       <div className=" flex items-center justify-between pb-6">
         <h2 className="font-semibold">店舗一覧</h2>
       </div>
-      <Table restaurants={state} />
+      <Table restaurants={restaurants} />
       <ToTopButton />
     </div>
   );

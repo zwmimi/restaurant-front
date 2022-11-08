@@ -1,6 +1,6 @@
-import { User } from "../../../types/user";
+import { ResponseRestaurant } from "../../../types/restaurant";
 
-type Props = { restaurants: User[] };
+type Props = { restaurants: ResponseRestaurant[] };
 export const Table = (props: Props) => {
   const { restaurants } = props;
   const TableHeaders = ["店舗名", "食べログURL", "メモ"];
@@ -33,12 +33,12 @@ export const Table = (props: Props) => {
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <p className="text-gray-900 whitespace-no-wrap">
-                    {restaurant.website}
+                    {restaurant.url}
                   </p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <p className="text-gray-900 whitespace-no-wrap">
-                    {restaurant.phone}
+                    {restaurant.description}
                   </p>
                 </td>
               </tr>
