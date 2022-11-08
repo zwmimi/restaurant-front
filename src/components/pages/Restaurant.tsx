@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { User } from "../../types/user";
+import { ToTopButton } from "../atoms/button/ToTopButton";
 import { Table } from "../atoms/table/Table";
 
 const Restaurant = () => {
@@ -23,9 +23,7 @@ const Restaurant = () => {
         <h2 className="font-semibold">店舗一覧</h2>
       </div>
       <Table restaurants={state} />
-      <div>
-        <Link to={`/`}>TOPへ戻る</Link>
-      </div>
+      <ToTopButton />
     </div>
   );
 };
