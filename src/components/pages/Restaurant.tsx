@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-const Card = () => {
-  const title = "カード";
+const Restaurant = () => {
+  const title = "店舗一覧";
   return (
     <>
       <h1>{title}</h1>
@@ -12,4 +12,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default Restaurant;

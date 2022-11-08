@@ -1,15 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Card from "./components/pages/Card";
-import Home from "./components/pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Router } from "./router/Router";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path={`/`} element={<Home />} />
-        <Route path={`/card`} element={<Card />} />
-        <Route path={`/create`} element={<Card />} />
-      </Routes>
+      <Router />
     </BrowserRouter>
   );
 }
