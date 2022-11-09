@@ -9,50 +9,30 @@ export const DetailCard = (props: Props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-      <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-        <table className="min-w-full leading-normal">
-          <thead>
-            <tr>
-              {TableHeaders.map((tebleHeader) => (
-                <th
-                  key={tebleHeader}
-                  className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                >
-                  {tebleHeader}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              key={restaurant.id}
-              // navigateで飛ばしてあげる
-              onClick={() => navigate(`/restaurant/${restaurant.id}`)}
-            >
-              <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <div className="ml-3">
-                  <p className="text-gray-900 whitespace-no-wrap">
-                    {restaurant.name}
-                  </p>
-                </div>
-              </td>
-              <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <a href={restaurant.url} target="_blank">
-                  <p className="text-gray-900 whitespace-no-wrap">
-                    {restaurant.url}
-                  </p>
-                </a>
-              </td>
-              <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <p className="text-gray-900 whitespace-no-wrap">
-                  {restaurant.description}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <>
+      <div className="w-11/12 md:max-w-md mx-auto shadow p-4 my-4 border rounded-lg bg-white">
+        <div className="flex flex-col mb-4">
+          <h1 className="font-bold text-yellow-500 text-center mb-4">
+            {restaurant.name}
+          </h1>
+          <p className="font-light text-center mb-4">
+            {restaurant.description}
+          </p>
+        </div>
+        <div className="flex justify-center">
+          <a href={restaurant.url} target="_blank">
+            <button className="text-white py-2 px-4 mr-4 font-semibold bg-yellow-400 rounded">
+              食べログ
+            </button>
+          </a>
+          <button className="text-white py-2 px-4 mr-4 font-semibold bg-lime-400 rounded">
+            編集
+          </button>
+          <button className="text-white py-2 px-4 font-semibold bg-red-400 rounded">
+            削除
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
