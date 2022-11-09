@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Restaurant } from "../../../types/restaurant";
 import { RestaurantErrorMsg } from "../../../types/valdation";
 import { restaurantFormValidate } from "../../../validation/validation";
+import { postRestaurant } from "../../../api/restaurant";
 
 export const RestaurantForm = () => {
   const initialFormItem = {
@@ -15,9 +16,10 @@ export const RestaurantForm = () => {
     description: [],
   };
   const [formItem, setFormItem] = useState<Restaurant>(initialFormItem);
-  const [errorMsg, setErrorMsg] = useState<RestaurantErrorMsg>(
+  const [formErrorMsg, setFormErrorMsg] = useState<RestaurantErrorMsg>(
     initialRestaurantErrorMsg
   );
+
   const setNewFormItem = (key: keyof Restaurant, val: string) => {
     const newFormItem = () => {
       switch (key) {
@@ -35,13 +37,15 @@ export const RestaurantForm = () => {
   };
   const clearFormItem = () => setFormItem(initialFormItem);
 
-  const postNewFormItem = () => {
+  const postNewFormItem = async (): Promise<void> => {
     // バリデーション
-    const genErrorMsg = restaurantFormValidate(formItem);
-    setErrorMsg(genErrorMsg);
+    const errorMsg = restaurantFormValidate(formItem);
+    setFormErrorMsg(errorMsg);
     // POST可能か判定
-    Object.values(genErrorMsg).every((msg) => msg.length === 0) &&
-      console.info("POST可能！");
+    if (Object.values(errorMsg).every((msg) => msg.length === 0)) {
+      await postRestaurant(formItem);
+    }
+    clearFormItem();
   };
 
   return (
@@ -50,9 +54,9 @@ export const RestaurantForm = () => {
         <div className="mb-5">
           <label htmlFor="name" className="mb-3 block text-base font-medium">
             店舗名
-            {errorMsg.name.length > 0 && (
+            {formErrorMsg.name.length > 0 && (
               <>
-                {errorMsg.name.map((msg) => (
+                {formErrorMsg.name.map((msg) => (
                   <span key={msg} className="text-red-500 text-sm ml-4">
                     {msg}
                   </span>
@@ -72,9 +76,9 @@ export const RestaurantForm = () => {
         <div className="mb-5">
           <label htmlFor="email" className="mb-3 block text-base font-medium">
             食べログURL
-            {errorMsg.url.length > 0 && (
+            {formErrorMsg.url.length > 0 && (
               <>
-                {errorMsg.url.map((msg) => (
+                {formErrorMsg.url.map((msg) => (
                   <span key={msg} className="text-red-500 text-sm ml-4">
                     {msg}
                   </span>
@@ -95,9 +99,9 @@ export const RestaurantForm = () => {
         <div className="mb-5">
           <label htmlFor="subject" className="mb-3 block text-base font-medium">
             メモ
-            {errorMsg.description.length > 0 && (
+            {formErrorMsg.description.length > 0 && (
               <>
-                {errorMsg.description.map((msg) => (
+                {formErrorMsg.description.map((msg) => (
                   <span key={msg} className="text-red-500 text-sm ml-4">
                     {msg}
                   </span>

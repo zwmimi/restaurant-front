@@ -24,7 +24,7 @@ export const restaurantFormValidate = (
   const pattern =
     /^https?:\/\/tabelog.com\/\w{3,9}\/A\d{4}\/A\d{6}\/\d{7,8}\/$/;
   pattern.test(restaurant.url) ||
-    errorMessage.url.push("正しいURLを入力してください");
+    errorMessage.url.push("※正しいURLを入力してください");
 
   return errorMessage;
 };
