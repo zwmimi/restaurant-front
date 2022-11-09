@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { Restaurant } from "../../../types/restaurant";
+import { RestaurantErrorMsg } from "../../../types/valdation";
+import { restaurantFormValidate } from "../../../validation/validation";
 
-export const Form = () => {
+export const RestaurantForm = () => {
   const initialFormItem = {
     name: "",
     url: "",
     description: "",
   };
+  const initialRestaurantErrorMsg: RestaurantErrorMsg = {
+    name: [],
+    url: [],
+    description: [],
+  };
   const [formItem, setFormItem] = useState<Restaurant>(initialFormItem);
+  const [errorMsg, setErrorMsg] = useState<RestaurantErrorMsg>(
+    initialRestaurantErrorMsg
+  );
   const setNewFormItem = (key: keyof Restaurant, val: string) => {
     const newFormItem = () => {
       switch (key) {
@@ -24,12 +34,31 @@ export const Form = () => {
     setFormItem(newFormItem);
   };
   const clearFormItem = () => setFormItem(initialFormItem);
+
+  const postNewFormItem = () => {
+    // バリデーション
+    const genErrorMsg = restaurantFormValidate(formItem);
+    setErrorMsg(genErrorMsg);
+    // POST可能か判定
+    Object.values(genErrorMsg).every((msg) => msg.length === 0) &&
+      console.info("POST可能！");
+  };
+
   return (
     <div className="flex items-center justify-center p-12">
       <div className="mx-auto w-full max-w-[550px]">
         <div className="mb-5">
           <label htmlFor="name" className="mb-3 block text-base font-medium">
             店舗名
+            {errorMsg.name.length > 0 && (
+              <>
+                {errorMsg.name.map((msg) => (
+                  <span key={msg} className="text-red-500 text-sm ml-4">
+                    {msg}
+                  </span>
+                ))}
+              </>
+            )}
           </label>
           <input
             type="text"
@@ -43,6 +72,15 @@ export const Form = () => {
         <div className="mb-5">
           <label htmlFor="email" className="mb-3 block text-base font-medium">
             食べログURL
+            {errorMsg.url.length > 0 && (
+              <>
+                {errorMsg.url.map((msg) => (
+                  <span key={msg} className="text-red-500 text-sm ml-4">
+                    {msg}
+                  </span>
+                ))}
+              </>
+            )}
           </label>
           <input
             type="text"
@@ -57,6 +95,15 @@ export const Form = () => {
         <div className="mb-5">
           <label htmlFor="subject" className="mb-3 block text-base font-medium">
             メモ
+            {errorMsg.description.length > 0 && (
+              <>
+                {errorMsg.description.map((msg) => (
+                  <span key={msg} className="text-red-500 text-sm ml-4">
+                    {msg}
+                  </span>
+                ))}
+              </>
+            )}
           </label>
           <input
             type="text"
@@ -69,7 +116,10 @@ export const Form = () => {
           />
         </div>
         <div>
-          <button className="bg-lime-400 py-2 px-4 mr-4 font-semibold text-white outline-none rounded">
+          <button
+            onClick={() => postNewFormItem()}
+            className="bg-lime-400 py-2 px-4 mr-4 font-semibold text-white outline-none rounded"
+          >
             登録
           </button>
           <button
