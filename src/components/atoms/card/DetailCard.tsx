@@ -1,13 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { ResponseRestaurant } from "../../../types/restaurant";
 
 type Props = { restaurant: ResponseRestaurant };
 export const DetailCard = (props: Props) => {
   const { restaurant } = props;
-  const TableHeaders = ["店舗名", "食べログURL", "メモ"];
-
-  const navigate = useNavigate();
-
   return (
     <>
       <div className="w-11/12 md:max-w-md mx-auto shadow p-4 my-4 border rounded-lg bg-white">
