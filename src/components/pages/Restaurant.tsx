@@ -7,7 +7,7 @@ const Restaurant = () => {
   const [restaurants, setRestaurants] = useState<ResponseRestaurant[]>([]);
 
   useEffect(() => {
-    const fetchUserList = async () => {
+    const fetchRestaurant = async () => {
       const results = await fetch("http://localhost:3000/restaurants").then(
         (res) => {
           return res.json();
@@ -15,7 +15,7 @@ const Restaurant = () => {
       );
       setRestaurants(results);
     };
-    fetchUserList();
+    fetchRestaurant();
   }, []);
 
   return (
