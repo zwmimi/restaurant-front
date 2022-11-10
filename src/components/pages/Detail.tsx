@@ -4,6 +4,7 @@ import { ResponseRestaurant } from "../../types/restaurant";
 import { DetailCard } from "../atoms/card/DetailCard";
 import { ToTopButton } from "../atoms/button/ToTopButton";
 import { RestaurantEditForm } from "../atoms/form/RestaurantEditForm";
+import { fetchRestaurantById } from "../../api/restaurant";
 
 export const Detail = () => {
   const [restaurant, setRestaurant] = useState<
@@ -17,11 +18,7 @@ export const Detail = () => {
 
   useEffect(() => {
     const fetchRestaurant = async () => {
-      const result = await fetch(
-        `http://localhost:3000/restaurants/${id}`
-      ).then((res) => {
-        return res.json();
-      });
+      const result = await fetchRestaurantById(id as string);
       setRestaurant(result);
     };
     fetchRestaurant();

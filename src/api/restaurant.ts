@@ -1,7 +1,21 @@
 import { ResponseRestaurant, Restaurant } from "../types/restaurant";
 
+// showAll
+export const fetchAllRestaurant = async (): Promise<ResponseRestaurant[]> => {
+  return await fetch("http://localhost:3000/restaurants")
+    .then((res) => res.json())
+    .then((data) => data);
+};
+
+// showById
+export const fetchRestaurantById = async (id: string) => {
+  return await fetch(`http://localhost:3000/restaurants/${id}`)
+    .then((res) => res.json())
+    .then((data) => data);
+};
+
 // create
-export const postRestaurant = async (formItem: Restaurant) => {
+export const postRestaurant = async (formItem: Restaurant): Promise<void> => {
   await fetch("http://localhost:3000/restaurants", {
     method: "POST",
     headers: {
@@ -14,7 +28,9 @@ export const postRestaurant = async (formItem: Restaurant) => {
 };
 
 // update
-export const updateRestaurant = async (formItem: ResponseRestaurant) => {
+export const updateRestaurant = async (
+  formItem: ResponseRestaurant
+): Promise<void> => {
   await fetch("http://localhost:3000/restaurants", {
     method: "PATCH",
     headers: {
@@ -27,7 +43,7 @@ export const updateRestaurant = async (formItem: ResponseRestaurant) => {
 };
 
 // delete
-export const deleteRestaurant = async (id: string) => {
+export const deleteRestaurant = async (id: string): Promise<void> => {
   await fetch(`http://localhost:3000/restaurants/${id}`, {
     method: "DELETE",
   }).then((res) => {

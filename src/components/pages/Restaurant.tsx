@@ -2,17 +2,14 @@ import { useEffect, useState } from "react";
 import { ResponseRestaurant } from "../../types/restaurant";
 import { ToTopButton } from "../atoms/button/ToTopButton";
 import { Table } from "../atoms/table/Table";
+import { fetchAllRestaurant } from "../../api/restaurant";
 
 const Restaurant = () => {
   const [restaurants, setRestaurants] = useState<ResponseRestaurant[]>([]);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
-      const results = await fetch("http://localhost:3000/restaurants").then(
-        (res) => {
-          return res.json();
-        }
-      );
+      const results = await fetchAllRestaurant();
       setRestaurants(results);
     };
     fetchRestaurants();
