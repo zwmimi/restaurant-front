@@ -69,7 +69,7 @@ export const RestaurantEditForm = () => {
             name="name"
             id="name"
             value={formItem.name}
-            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium outline-none"
             onChange={(e) => setNewFormItem("name", e.target.value)}
           />
         </div>
@@ -92,7 +92,7 @@ export const RestaurantEditForm = () => {
             id="url"
             value={formItem.url}
             placeholder="https://tabelog.com/"
-            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium outline-none"
             onChange={(e) => setNewFormItem("url", e.target.value)}
           />
         </div>
@@ -115,7 +115,7 @@ export const RestaurantEditForm = () => {
             id="description"
             value={formItem.description}
             placeholder="店の雰囲気など"
-            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium outline-none"
             onChange={(e) => setNewFormItem("description", e.target.value)}
           />
         </div>
