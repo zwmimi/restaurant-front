@@ -1,4 +1,4 @@
-import { Restaurant } from "../types/restaurant";
+import { ResponseRestaurant, Restaurant } from "../types/restaurant";
 
 // create
 export const postRestaurant = async (formItem: Restaurant) => {
@@ -10,6 +10,19 @@ export const postRestaurant = async (formItem: Restaurant) => {
     body: JSON.stringify(formItem),
   }).then((res) => {
     res.ok ? alert("登録完了") : alert(`HTTP-Error : ${res.status}`);
+  });
+};
+
+// update
+export const updateRestaurant = async (formItem: ResponseRestaurant) => {
+  await fetch("http://localhost:3000/restaurants", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formItem),
+  }).then((res) => {
+    res.ok ? alert("更新しました") : alert(`HTTP-Error : ${res.status}`);
   });
 };
 

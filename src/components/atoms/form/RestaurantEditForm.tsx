@@ -1,11 +1,19 @@
-import { useState } from "react";
-import { Restaurant } from "../../../types/restaurant";
+import { useState, useEffect } from "react";
+import { updateRestaurant } from "../../../api/restaurant";
+import { ResponseRestaurant, Restaurant } from "../../../types/restaurant";
 import { RestaurantErrorMsg } from "../../../types/valdation";
 import { restaurantFormValidate } from "../../../validation/validation";
-import { postRestaurant } from "../../../api/restaurant";
 
-export const RestaurantEditForm = () => {
+type Props = {
+  restaurant: ResponseRestaurant;
+  setRestaurant: (restaurant: ResponseRestaurant) => void;
+};
+
+export const RestaurantEditForm = (props: Props) => {
+  const { restaurant, setRestaurant } = props;
+
   const initialFormItem = {
+    id: "",
     name: "",
     url: "",
     description: "",
@@ -15,10 +23,14 @@ export const RestaurantEditForm = () => {
     url: [],
     description: [],
   };
-  const [formItem, setFormItem] = useState<Restaurant>(initialFormItem);
+  const [formItem, setFormItem] = useState<ResponseRestaurant>(initialFormItem);
   const [formErrorMsg, setFormErrorMsg] = useState<RestaurantErrorMsg>(
     initialRestaurantErrorMsg
   );
+
+  useEffect(() => {
+    setFormItem(restaurant);
+  }, []);
 
   const setNewFormItem = (key: keyof Restaurant, val: string) => {
     const newFormItem = () => {
@@ -35,17 +47,18 @@ export const RestaurantEditForm = () => {
     };
     setFormItem(newFormItem);
   };
-  const clearFormItem = () => setFormItem(initialFormItem);
+  const resetFormItem = () => setFormItem(restaurant);
 
-  const postNewFormItem = async (): Promise<void> => {
+  const updateFormItem = async (): Promise<void> => {
     // バリデーション
     const errorMsg = restaurantFormValidate(formItem);
     setFormErrorMsg(errorMsg);
     // POST可能か判定
     if (Object.values(errorMsg).every((msg) => msg.length === 0)) {
-      await postRestaurant(formItem);
+      await updateRestaurant(formItem);
+      // DetailCardの更新
+      setRestaurant(formItem);
     }
-    clearFormItem();
   };
 
   return (
@@ -121,16 +134,16 @@ export const RestaurantEditForm = () => {
         </div>
         <div>
           <button
-            onClick={() => postNewFormItem()}
+            onClick={() => updateFormItem()}
             className="bg-lime-400 py-2 px-4 mr-4 font-semibold text-white outline-none rounded"
           >
             登録
           </button>
           <button
-            onClick={() => clearFormItem()}
+            onClick={() => resetFormItem()}
             className="bg-transparent text-lime-400 py-2 px-4 font-semibold border border-lime-400 rounded"
           >
-            クリア
+            リセット
           </button>
         </div>
       </div>

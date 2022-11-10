@@ -33,7 +33,12 @@ export const Detail = () => {
         isShowEditForm={isShowEditForm}
         clickEditButton={clickEditButton}
       />
-      {isShowEditForm && <RestaurantEditForm />}
+      {isShowEditForm && (
+        <RestaurantEditForm
+          restaurant={restaurant}
+          setRestaurant={setRestaurant}
+        />
+      )}
       <ToTopButton />
     </>
   ) : null;
