@@ -28,7 +28,7 @@ export const Table = (props: Props) => {
             {restaurants.map((restaurant) => (
               <tr
                 key={restaurant.id}
-                onClick={() => navigate(`/restaurant/${restaurant.id}`)}
+                onClick={() => navigate(`/restaurant/detail/${restaurant.id}`)}
               >
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <div className="ml-3 cursor-pointer">

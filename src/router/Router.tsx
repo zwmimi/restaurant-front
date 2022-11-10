@@ -12,7 +12,7 @@ export const Router: FC = memo(() => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/restaurant" element={<Restaurant />} />
-        <Route path="/restaurant/:id" element={<Detail />} />
+        <Route path="/restaurant/detail/:id" element={<Detail />} />
         <Route path="/create" element={<Create />} />
       </Routes>
     </Header>
