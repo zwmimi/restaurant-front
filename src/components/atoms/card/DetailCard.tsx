@@ -2,9 +2,13 @@ import { ResponseRestaurant } from "../../../types/restaurant";
 import { deleteRestaurant } from "../../../api/restaurant";
 import { useNavigate } from "react-router-dom";
 
-type Props = { restaurant: ResponseRestaurant };
+type Props = {
+  restaurant: ResponseRestaurant;
+  isShowEditForm: boolean;
+  clickEditButton: (isShowEditForm: boolean) => void;
+};
 export const DetailCard = (props: Props) => {
-  const { restaurant } = props;
+  const { restaurant, isShowEditForm, clickEditButton } = props;
 
   const navigate = useNavigate();
 
@@ -31,7 +35,10 @@ export const DetailCard = (props: Props) => {
               食べログ
             </button>
           </a>
-          <button className="text-white py-2 px-4 mr-4 font-semibold bg-lime-400 rounded">
+          <button
+            onClick={() => clickEditButton(isShowEditForm)}
+            className="text-white py-2 px-4 mr-4 font-semibold bg-lime-400 rounded"
+          >
             編集
           </button>
           <button
