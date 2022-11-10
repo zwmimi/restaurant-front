@@ -1,8 +1,19 @@
 import { ResponseRestaurant } from "../../../types/restaurant";
+import { deleteRestaurant } from "../../../api/restaurant";
+import { useNavigate } from "react-router-dom";
 
 type Props = { restaurant: ResponseRestaurant };
 export const DetailCard = (props: Props) => {
   const { restaurant } = props;
+
+  const navigate = useNavigate();
+
+  const onClickDeleteButtnon = async (restaurant: ResponseRestaurant) => {
+    const flag = confirm(`「${restaurant.name}」を削除してよろしいでしょうか`);
+    flag && (await deleteRestaurant(restaurant.id));
+    navigate("/restaurant");
+  };
+
   return (
     <>
       <div className="w-11/12 md:max-w-md mx-auto shadow p-4 my-4 border rounded-lg bg-white">
@@ -23,7 +34,10 @@ export const DetailCard = (props: Props) => {
           <button className="text-white py-2 px-4 mr-4 font-semibold bg-lime-400 rounded">
             編集
           </button>
-          <button className="text-white py-2 px-4 font-semibold bg-red-400 rounded">
+          <button
+            onClick={() => onClickDeleteButtnon(restaurant)}
+            className="text-white py-2 px-4 font-semibold bg-red-400 rounded"
+          >
             削除
           </button>
         </div>
