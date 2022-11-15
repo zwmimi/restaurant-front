@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ResponseRestaurant } from "../../../types/restaurant";
 
 type Props = { restaurants: ResponseRestaurant[] };
-export const Table = (props: Props) => {
+export const RestaurantsTable = (props: Props) => {
   const { restaurants } = props;
   const TableHeaders = ["店舗名", "メモ"];
 
