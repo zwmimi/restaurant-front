@@ -12,12 +12,12 @@ export const restaurantFormValidate = (
     errorMessage.description.push("※入力してください");
 
   // 文字列制限
-  restaurant.name.length > 50 &&
-    errorMessage.name.push("※50文字以下にしてください");
+  restaurant.name.length > 30 &&
+    errorMessage.name.push("※30文字以下にしてください");
   restaurant.url.length > 52 &&
     errorMessage.url.push("※52文字以下にしてください");
-  restaurant.description.length > 100 &&
-    errorMessage.description.push("※100文字以下にしてください");
+  restaurant.description.length > 80 &&
+    errorMessage.description.push("※80文字以下にしてください");
 
   // urlチェック
   // 例 https://tabelog.com/tokyo/A1234/A123456/1234567/
